@@ -7,20 +7,24 @@ block content
             .header
                 h4.title Enter new contact
             .content
-                form
+                form(action="contacts", method="POST")
                     .row
                         .col-md-4
                             .form-group
                                 label Email address
-                                input(type="text")
+                                input.form-control(type="text", name="email")
                         .col-md-4
                             .form-group
                                 label Phone number
-                                input(type="text")
+                                input.form-control(type="text", name="phoneNumber")
                         .col-md-4
                             .form-group
                                 label Role
-                                input(type="text")
+                                select#inputState.form-control(name="role")
+                                    option(value="student",selected='') Student
+                                    option(value="staff") Staff
+                                    option(value="guardian") Guardian
+                                    option(value="security") Security
                     .row(style="padding-right:10px")
                         input.btn.btn-info.btn-fill.pull-right(type="submit", value="Save")
     //- Table 
@@ -36,8 +40,14 @@ block content
                         th Contact phone number
                         th role
                     tbody
-                        th Brianphiri@email.com
-                        th 0786374030
-                        th student
+                        each val in data
+                            tr
+                                th=val.email
+                                if val.phoneNumber
+                                    th=val.phoneNumber
+                                else
+                                    th N/A
+                                th=val.role
+
 
 
