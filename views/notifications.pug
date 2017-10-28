@@ -1,0 +1,46 @@
+extends layout
+
+block content
+    //- form
+    .col-md-12
+        .card
+            .header
+                h4.title Enter notification command
+            .content
+                form(action="notifications", method="POST")
+                    .row
+                        .col-md-6
+                            .form-group
+                                label Classification
+                                select#inputState.form-control(name="case")
+                                    option(value="3",selected='') Gun fire
+                                    option(value="8") siren
+                                    option(value="2") Crowd
+                                    option(value="9") Music
+                        .col-md-6
+                            .form-group
+                                label Notify
+                                select#inputState.form-control(name="notify")
+                                    option(value="security",selected='') Security
+                                    option(value="staff") Staff
+                                    option(value="student") Student
+                                    option(value="guardian") Guardian
+
+                        input.btn.btn-info.btn-fill.pull-right(type="submit", value="Save")
+    //- Table 
+    .col-md-12
+        .card
+            .header
+                h4.title Notification information
+                p.category Contact incase 
+            .content.table-responsive.table-full-width
+                table.table.table-hover.table-striped
+                    thead
+                        th Case
+                        th Notify
+                    tbody
+                        each val in data
+                            tr
+                                td=val.case
+                                td=val.notify
+
