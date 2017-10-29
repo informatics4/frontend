@@ -45,11 +45,19 @@ block content
                         th Status
                         th Action
                     tbody
-                        tr
-                            td Room 12
-                            td open
-                            td 
-                                input(type="button", value="Open")
-                                input(type="button", value="Lock")
+                        each val in data
+                            tr
+                                td=val.room
+                                td=val.action
+                                td
+                                    .row 
+                                        form(action='locks/open', method="POST")
+                                            input(type="hidden", name='room', value=val.room)
+                                            input(type="hidden", name='action', value='open')
+                                            input(type="submit", value="Open")
+                                        form(action='locks/lock', method="POST")
+                                            input(type="hidden", name='room', value=val.room)
+                                            input(type="hidden", name='action', value='lock')
+                                            input(type="submit", value="Lock")
 
 
