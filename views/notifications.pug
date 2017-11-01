@@ -5,7 +5,7 @@ block content
     .col-md-12
         .card
             .header
-                h4.title Enter notification command
+                h4.title ENTER NOTIFICATION COMMAND
             .content
                 form(action="notifications", method="POST")
                     .row
@@ -26,6 +26,7 @@ block content
                                     option(value="student") Student
                                     option(value="guardian") Guardian
 
+                    .row(style="padding-right:10px")
                         input.btn.btn-info.btn-fill.pull-right(type="submit", value="Save")
     //- Table 
     .col-md-12
@@ -41,6 +42,15 @@ block content
                     tbody
                         each val in data
                             tr
-                                td=val.case
+                                if val.case == '6'
+                                    td Gun fire
+                                else if val.case == '3'
+                                    td Gun fire
+                                else if val.case == '8'
+                                    td Siren
+                                else if val.case == '9'
+                                    td Music playing
+                                else 
+                                    td Crowd
                                 td=val.notify
 

@@ -5,10 +5,10 @@ block content
     .col-md-12
         .card
             .header
-                h4.title Enter new Lock command
+                h4.title ENTER NEW LOCK COMMAND
             .content
                 form(action="locks", method="POST")
-                    .row
+                    .row(style="padding:10px")
                         .col-md-4
                             .form-group
                                 label Room
@@ -31,12 +31,13 @@ block content
                                 select#inputState.form-control(name="action")
                                     option(value="open",selected='') Keep open
                                     option(value="lock") Lock
+
                         input.btn.btn-info.btn-fill.pull-right(type="submit", value="Save")
     //- Table 
     .col-md-12
         .card
             .header
-                h4.title Room Lock information
+                h4.title ROM LOCK INFORMATION
                 p.category Locked rooms
             .content.table-responsive.table-full-width
                 table.table.table-hover.table-striped
@@ -51,13 +52,21 @@ block content
                                 td=val.action
                                 td
                                     .row 
-                                        form(action='locks/open', method="POST")
-                                            input(type="hidden", name='room', value=val.room)
-                                            input(type="hidden", name='action', value='open')
-                                            input(type="submit", value="Open")
-                                        form(action='locks/lock', method="POST")
-                                            input(type="hidden", name='room', value=val.room)
-                                            input(type="hidden", name='action', value='lock')
-                                            input(type="submit", value="Lock")
+                                        .col-md-1
+                                            form(action='locks/open', method="POST")
+                                                input(type="hidden", name='room', value=val.room)
+                                                input(type="hidden", name='action', value='open')
+                                                if val.action == 'open'
+                                                    input.btn.btn-sm.btn-success(type="submit", value="Open")
+                                                else
+                                                    input.btn.btn-sm.btn-success.btn-fill(type="submit", value="Open")
+                                        .col-md-1
+                                            form(action='locks/lock', method="POST")
+                                                input(type="hidden", name='room', value=val.room)
+                                                input(type="hidden", name='action', value='lock')
+                                                if val.action == 'lock'
+                                                    input.btn.btn-sm.btn-danger(type="submit", value="Lock")
+                                                else
+                                                    input.btn.btn-sm.btn-danger.btn-fill(type="submit", value="Lock")
 
 
