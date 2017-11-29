@@ -4,12 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var pdf = require('express-pdf');
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var contacts = require('./routes/contacts');
-var locks = require('./routes/locks')
-var notifications = require('./routes/notifications')
+var locks = require('./routes/locks');
+var notifications = require('./routes/notifications');
+var reports = require('./routes/reports');
 
 var app = express();
 
@@ -24,12 +27,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(pdf)
 
 app.use('/', index);
 app.use('/users', users);
 app.use('/contacts', contacts)
 app.use('/locks', locks)
 app.use('/notifications', notifications)
+app.use('/reports', reports)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
